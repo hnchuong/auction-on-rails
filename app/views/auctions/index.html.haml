@@ -1,0 +1,35 @@
+%h1 Listing auctions
+
+%table
+  %thead
+    %tr
+      %th Title
+      %th Description
+      %th Starting price
+      %th Current price
+      %th Start time
+      %th End time
+      %th Status
+      %th Seller
+      %th
+      %th
+      %th
+
+  %tbody
+    - @auctions.each do |auction|
+      %tr
+        %td= auction.title
+        %td= auction.description
+        %td= auction.starting_price
+        %td= auction.current_price
+        %td= auction.start_time
+        %td= auction.end_time
+        %td= auction.status
+        %td= auction.seller
+        %td= link_to 'Show', auction
+        %td= link_to 'Edit', edit_auction_path(auction)
+        %td= link_to 'Destroy', auction, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Auction', new_auction_path

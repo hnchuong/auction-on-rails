@@ -1,0 +1,17 @@
+-# frozen_string_literal: true
+= simple_form_for(@auction) do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+  .form-inputs
+    = f.input :title
+    = f.input :description
+    = f.input :starting_price
+    = f.input :current_price
+    = f.input :start_time
+    = f.input :end_time
+    = f.input :status
+    = f.association :seller
+
+  .form-actions
+    = f.button :submit
