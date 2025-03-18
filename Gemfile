@@ -59,3 +59,7 @@ group :development do
 end
 
 gem "rspec-rails", "~> 7.1"
+
+gem "haml-rails", "~> 2.1"
+
+gem "simple_form", "~> 5.3"
