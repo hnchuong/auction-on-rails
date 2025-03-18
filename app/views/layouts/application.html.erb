@@ -24,6 +24,21 @@
 
   <body>
     <main class="container mx-auto mt-28 px-5 flex">
+    <header>
+      <nav>
+        <ul>
+          <li><%= link_to "Home", root_path %></li>
+          <% unless authenticated? %>
+          <li><%= link_to "Login", new_session_path %></li>
+          <% else %>Hello, <%= current_user.name %>
+          <li><%= link_to "Logout", session_path, method: :delete, data: { turbo_method: :delete } %></li>
+          <% end%>
+        </ul>
+      </nav>
+      </header>
+      <% flash.each do |key, message| %>
+        <div class="alert alert-<%= key %>"><%= message %></div>
+      <% end %>
       <%= yield %>
     </main>
   </body>
