@@ -16,8 +16,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_18_090636) do
     t.text "description"
     t.decimal "starting_price", null: false
     t.decimal "current_price"
-    t.datetime "start_time", null: false
-    t.datetime "end_time", null: false
+    t.datetime "start_time"
+    t.integer "duration", null: false
     t.string "status"
     t.integer "seller_id", null: false
     t.datetime "created_at", null: false
@@ -27,7 +27,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_18_090636) do
 
   create_table "bids", force: :cascade do |t|
     t.decimal "amount"
-    t.string "status", default: "BIDDING", null: false
+    t.string "status"
     t.integer "auction_id", null: false
     t.integer "buyer_id", null: false
     t.datetime "created_at", null: false

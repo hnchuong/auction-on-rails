@@ -9,6 +9,7 @@ class HomeController < ApplicationController
     if authenticated? # current_user
       redirect_to dashboard_map[current_user.role.downcase.to_sym]
     else
+      @user = User.new
       render :index
     end
   end

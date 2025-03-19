@@ -8,8 +8,16 @@ class User < ApplicationRecord
   validates :email_address, presence: true, uniqueness: true
   validates :role, presence: true, inclusion: { in: %w[BUYER SELLER] }
 
-  has_many :auctions
-  has_many :bids
+  has_many :auctions, foreign_key: :seller_id, dependent: :destroy
+  has_many :bids, dependent: :destroy, foreign_key: :buyer_id
+
+  def bidding_auctions
+    Auction.joins(:bids).where(bids: { buyer_id: id }).distinct
+  end
+
+  def on_bid?(auction)
+    auction.bids.where(buyer_id: self.id).present?
+  end
 
   def buyer?
     role == "BUYER"

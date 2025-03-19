@@ -1,0 +1,3 @@
+<%= turbo_stream.replace @auction do %>
+  <%= render partial: "auctions/auction", locals: { auction: @auction } %>
+<% end %>

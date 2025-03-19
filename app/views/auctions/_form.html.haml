@@ -4,14 +4,10 @@
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
 
   .form-inputs
-    = f.input :title
-    = f.input :description
-    = f.input :starting_price
-    = f.input :current_price
-    = f.input :start_time
-    = f.input :end_time
-    = f.input :status
-    = f.association :seller
+    = f.input :title, label_html: { class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" }, input_html: { class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" }
+    = f.input :description, label_html: { class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" }, input_html: { class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" }
+    = f.input :starting_price, label_html: { class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" }, input_html: { class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" }
+    = f.input :duration, as: :integer, label: 'Duration (in minutes)', label_html: { class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" }, input_html: { class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" }
 
   .form-actions
     = f.button :submit

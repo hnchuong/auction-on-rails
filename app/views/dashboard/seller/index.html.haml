@@ -1,2 +1,7 @@
-%h1 Dashboard::Seller#index
-%p Find me in app/views/dashboard/seller/index.html.haml
+%h1{class: 'text-2xl font-bold'} Listing auctions
+%div{class: 'mx-auto mt-16 grid max-w-2xl grid-cols-2 gap-6 sm:gap-8 lg:mt-10 lg:max-w-none lg:grid-cols-2'}
+  = render partial: 'auctions/auction', collection: @auctions
+
+- if @auctions.empty?
+  %p You haven't created any auctions yet.
+  = link_to "Create an auction", new_auction_path, class: "group inline-flex items-center justify-center rounded-full py-2 px-4 text-sm font-semibold focus:outline-hidden focus-visible:outline-2 focus-visible:outline-offset-2 bg-blue-600 text-white hover:text-slate-100 hover:bg-blue-500 active:bg-blue-800 active:text-blue-100 focus-visible:outline-blue-600"

@@ -3,5 +3,9 @@ class Bid < ApplicationRecord
   belongs_to :buyer, class_name: 'User'
 
   validates :amount, presence: true, numericality: { greater_than: 0 }
-  validates :status, presence: true, inclusion: { in: %w[BIDDING WON LOST] }
+
+  validates_each :amount do |record, attr, value|
+    current_price = record.auction.current_price || record.auction.starting_price
+    record.errors.add(attr, 'must be greater than the current price') if record.auction.current_price && value <= current_price
+  end
 end

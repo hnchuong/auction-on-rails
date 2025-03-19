@@ -1,70 +1,57 @@
 class AuctionsController < ApplicationController
-  before_action :set_auction, only: %i[ show edit update destroy ]
+  before_action :set_auction, only: %i[edit update destroy start ]
 
-  # GET /auctions or /auctions.json
-  def index
-    @auctions = Auction.all
-  end
-
-  # GET /auctions/1 or /auctions/1.json
-  def show
-  end
-
-  # GET /auctions/new
   def new
-    @auction = Auction.new
+    @auction = current_user.auctions.build
   end
 
-  # GET /auctions/1/edit
   def edit
   end
 
-  # POST /auctions or /auctions.json
   def create
-    @auction = Auction.new(auction_params)
+    @auction = current_user.auctions.build(auction_params.merge(status: 'INACTIVE'))
 
-    respond_to do |format|
-      if @auction.save
-        format.html { redirect_to @auction, notice: "Auction was successfully created." }
-        format.json { render :show, status: :created, location: @auction }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @auction.errors, status: :unprocessable_entity }
-      end
+    if @auction.save
+      redirect_to dashboard_seller_index_path, notice: "Auction was successfully created."
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /auctions/1 or /auctions/1.json
   def update
-    respond_to do |format|
-      if @auction.update(auction_params)
-        format.html { redirect_to @auction, notice: "Auction was successfully updated." }
-        format.json { render :show, status: :ok, location: @auction }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @auction.errors, status: :unprocessable_entity }
-      end
+    if @auction.update(auction_params)
+      redirect_to dashboard_seller_index_path, notice: "Auction was successfully updated."
+    else
+      render :edit, status: :unprocessable
     end
   end
 
-  # DELETE /auctions/1 or /auctions/1.json
   def destroy
     @auction.destroy!
 
-    respond_to do |format|
-      format.html { redirect_to auctions_path, status: :see_other, notice: "Auction was successfully destroyed." }
-      format.json { head :no_content }
+    redirect_to auctions_path, status: :see_other, notice: "Auction was successfully destroyed."
+  end
+
+  def show
+    @auction = Auction.find(params[:id])
+  end
+
+  def start
+    if StartAuctionService.call(auction: @auction)
+      render action: 'start'
+    else
+      render turbo_stream: turbo_stream.replace(@auction, partial: "auctions/auction", locals: { auction: @auction })
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_auction
-      @auction = Auction.find(params.expect(:id))
+      @auction = current_user.auctions.find(params.expect(:id))
     end
 
     # Only allow a list of trusted parameters through.
     def auction_params
-      params.expect(auction: [ :title, :description, :starting_price, :current_price, :start_time, :end_time, :status, :seller_id ])
+      params.expect(auction: [ :title, :description, :starting_price, :current_price, :start_date, :start_time_only, :duration, :status, :seller_id ])
     end
 end
