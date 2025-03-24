@@ -63,3 +63,5 @@ gem "rspec-rails", "~> 7.1"
 gem "haml-rails", "~> 2.1"
 
 gem "simple_form", "~> 5.3"
+
+gem "anycable-rails", "~> 1.6"
