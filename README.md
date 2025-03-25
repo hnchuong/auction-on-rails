@@ -36,4 +36,3 @@ A simple real-time auction system where sellers list items for auction and buyer
   - with tailwindcss classes repetition.
   - turbo seems to be more limited than ujs/jquery
   - activecable/anycable is not well documented.
-  - NO UNIT TESTS yet.
