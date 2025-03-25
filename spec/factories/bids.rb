@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :bid do
-    amount { 100 }
+    amount { 150 }
     association :auction
     association :buyer, factory: :user
   end
