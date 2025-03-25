@@ -58,7 +58,13 @@ group :development do
   gem "web-console"
 end
 
-gem "rspec-rails", "~> 7.1"
+group :test do
+  gem "rspec-rails", "~> 7.1"
+  gem "factory_bot_rails"
+  gem "faker", "~> 3.5"
+  gem "shoulda-matchers", "~> 6.4"
+end
+
 
 gem "haml-rails", "~> 2.1"
 
