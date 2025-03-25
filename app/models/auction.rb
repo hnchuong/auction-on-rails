@@ -36,7 +36,7 @@ class Auction < ApplicationRecord
   end
 
   def out_bid?(user)
-    highest_bid&.buyer || user != user
+    (highest_bid&.buyer || user) != user
   end
 
   def no_bid?(user)
