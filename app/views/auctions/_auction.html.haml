@@ -48,6 +48,7 @@
       = link_to 'Start', start_auction_path(auction), data: {turbo_method: :patch, turbo_stream: true}, class: "group inline-flex items-center justify-center rounded-full py-2 px-4 text-sm font-semibold focus:outline-hidden focus-visible:outline-2 focus-visible:outline-offset-2 bg-blue-600 text-white hover:text-slate-100 hover:bg-blue-500 active:bg-blue-800 active:text-blue-100 focus-visible:outline-blue-600"
   - if current_user.buyer? && (auction.active? || auction.bidding?)
     %hr{class: 'border-t border-gray-500 my-4'}
-    = simple_form_for([auction, auction.bids.build], html: {class: 'flex gap-2'}, data: { turbo: true }) do |f|
+    = simple_form_for([auction, auction.bids.build], html: {class: 'flex flex-wrap gap-2'}, data: { turbo: true }) do |f|
+      %p.basic-full.w-full.text-rose-500{ id: "auction-#{auction.id}-bid-error" }
       = f.input :amount, label: false, input_html: {class: 'rounded-lg p-2 border border-gray-300'}
       = f.button :submit, 'Place bid', class: 'rounded-lg p-2 bg-blue-600 text-white hover:bg-blue-500'

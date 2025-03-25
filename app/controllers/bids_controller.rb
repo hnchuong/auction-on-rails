@@ -12,17 +12,11 @@ class BidsController < ApplicationController
     @bid.auction = @auction
 
     @bid = MakeBidService.call(bid_params: bid_params, bidder: current_user, auction: @auction)
-    render action: 'create'
-
-    # respond_to do |format|
-    #   if @bid.save
-    #     format.html { redirect_to @bid, notice: "Bid was successfully created." }
-    #     format.json { render :show, status: :created, location: @bid }
-    #   else
-    #     format.html { render :new, status: :unprocessable_entity }
-    #     format.json { render json: @bid.errors, status: :unprocessable_entity }
-    #   end
-    # end
+    if @bid.persisted?
+      render action: 'create'
+    else
+      render action: 'error'
+    end
   end
 
   private

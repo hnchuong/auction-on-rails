@@ -13,10 +13,10 @@ class MakeBidService < BaseService
     if bid.save
       @auction.update(current_price: bid.amount, status: 'BIDDING')
       broadcast_bid_created(bid)
-      bid
-    else
-      raise StandardError, bid.errors.full_messages.to_sentence
+    # else
+    #   raise StandardError, bid.errors.full_messages.to_sentence
     end
+    bid
   end
 
   private
