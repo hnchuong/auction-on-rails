@@ -1,8 +1,7 @@
 %h1{class: 'text-2xl font-bold'} My Bidding Auctions
 
-%div#my-biddings{class: 'mx-auto mt-16 grid max-w-2xl grid-cols-2 gap-6 sm:gap-8 lg:mt-10 lg:max-w-none lg:grid-cols-2'}
-  = render partial: "auctions/auction", collection: @auctions
+-# %div#my-biddings{class: 'mx-auto mt-16 grid max-w-2xl grid-cols-2 gap-6 sm:gap-8 lg:mt-10 lg:max-w-none lg:grid-cols-2'}
+-#   = render partial: "auctions/auction", collection: @auctions
 
--# %h1 Active Auctions
--# %div#active-auctions{class: 'mx-auto mt-16 grid max-w-2xl grid-cols-2 gap-6 sm:gap-8 lg:mt-10 lg:max-w-none lg:grid-cols-2'}
--#   = render partial: "auctions/auction", collection: @active_auctions
+%div#active-auctions{class: 'mx-auto mt-16 grid max-w-2xl grid-cols-2 gap-6 sm:gap-8 lg:mt-10 lg:max-w-none lg:grid-cols-2'}
+  = render partial: "auctions/auction", collection: @active_auctions
